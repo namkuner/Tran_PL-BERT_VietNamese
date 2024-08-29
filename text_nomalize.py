@@ -49,6 +49,8 @@ def has_date(inputString):
 def is_time(text):
     if ":" not in text:
         return False
+    if "-" in text:
+        text = text[:-1]
     splt = text.split(":")
     if len(splt)>3 or '' in splt:
         return False
@@ -82,7 +84,13 @@ def normalize_single(text):
             text = labels["DATE"].convert_date(text)
 
         elif is_time(text):
-            text = labels['TIME'].convert(text)
+            if text.endswith("-"):
+                kq = labels['TIME'].convert(text[:-1])
+                kq += " đến"
+            else:
+                kq = labels['TIME'].convert(text)
+            text =kq
+
         elif is_money(text):
             text = labels['MONEY'].convert(text)
 
@@ -102,6 +110,9 @@ def normalize_single(text):
 
     return text.replace("$", "")
 if __name__ == "__main__":
-    text ="13:"
-    x = normalize_single(text)
-    print(x)
+    v ="13:11-12:12"
+    v =word_tokenize(v)
+    print(v)
+    for i in v:
+        te =normalize_single(i)
+        print(i, te)
