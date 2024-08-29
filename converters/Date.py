@@ -69,15 +69,19 @@ class DateVietnamese:
     def convert_date(self, date: str) -> str:
         # Tìm và tách ngày, tháng, năm dựa trên dấu phân cách
         date_parts = re.split(r"[\/\-\.\s]", date)
+        if len(date_parts) ==3 :
+            day, month, year = date_parts[0], date_parts[1], date_parts[2]
 
-        day, month, year = date_parts[0], date_parts[1], date_parts[2]
+            day_text = f"ngày {self.day_trans_dict[day.lstrip('0')]}"
+            month_text = f"tháng {self.month_trans_dict[month.lstrip('0')]}"
+            year_text = f"năm {self.convert_year(year)}"
 
-        day_text = f"ngày {self.day_trans_dict[day.lstrip('0')]}"
-        month_text = f"tháng {self.month_trans_dict[month.lstrip('0')]}"
-        year_text = f"năm {self.convert_year(year)}"
-
-        return f"{day_text} {month_text} {year_text}"
-
+            return f"{day_text} {month_text} {year_text}"
+        else:
+            month, year = date_parts[0], date_parts[1],
+            month_text = f"tháng {self.month_trans_dict[month.lstrip('0')]}"
+            year_text = f"năm {self.convert_year(year)}"
+            return f"{month_text} {year_text}"
 if __name__ == "__main__":
     date_converter = DateVietnamese()
 

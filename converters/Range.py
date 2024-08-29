@@ -1,6 +1,6 @@
 from singleton_decorator import singleton
 import re
-from Cardinal import CardinalVietnamese
+from .Cardinal import CardinalVietnamese
 
 
 @singleton

@@ -11,6 +11,7 @@ from converters.Fraction import Fraction
 from converters.Telephone import TelephoneVietnamese
 from converters.Cardinal import CardinalVietnamese
 from converters.Decimal import Decimal
+from converters.Range import Range
 labels ={
     'DATE': DateVietnamese(),
     'TIME':Time(),
@@ -18,7 +19,8 @@ labels ={
     'FRACTION':Fraction(),
     'TELEPHONE':TelephoneVietnamese(),
     'CARDINAL':CardinalVietnamese(),
-    'DECIMAL':Decimal()
+    'DECIMAL':Decimal(),
+    'RANGE' :Range()
 }
 def has_numbers(inputString):
     return any(char.isdigit() for char in inputString)
@@ -48,7 +50,7 @@ def is_time(text):
     if ":" not in text:
         return False
     splt = text.split(":")
-    if len(splt)>3:
+    if len(splt)>3 or '' in splt:
         return False
     elif len(splt)==2:
         HH,MM = int(splt[0]),int(splt[1])
@@ -100,6 +102,6 @@ def normalize_single(text):
 
     return text.replace("$", "")
 if __name__ == "__main__":
-    text ="13:15:22"
+    text ="13:"
     x = normalize_single(text)
     print(x)
