@@ -12,6 +12,8 @@ from converters.Telephone import TelephoneVietnamese
 from converters.Cardinal import CardinalVietnamese
 from converters.Decimal import Decimal
 from converters.Range import Range
+from converters.Meansure import Measure
+
 labels ={
     'DATE': DateVietnamese(),
     'TIME':Time(),
@@ -20,7 +22,8 @@ labels ={
     'TELEPHONE':TelephoneVietnamese(),
     'CARDINAL':CardinalVietnamese(),
     'DECIMAL':Decimal(),
-    'RANGE' :Range()
+    'RANGE' :Range(),
+    'MEANSURE': Measure()
 }
 def has_numbers(inputString):
     return any(char.isdigit() for char in inputString)
@@ -36,13 +39,13 @@ def has_date(inputString):
     if len(splt) == 2:
         month = int(splt[0])
         year = int(splt[1])
-        if month >12 or year > 2200:
+        if month >12 or year > 2200 or month <1:
             return False
     if len(splt)==3:
         day =int(splt[0])
         month = int(splt[1])
         year =int(splt[2])
-        if day >31 or month > 12 or year >2200:
+        if day >31 or month > 12 or year >2200 or day < 1 or month <1:
             return False
     return True
 
@@ -77,7 +80,11 @@ def is_range(inputString) :
 def is_telephone(inputString):
     if inputString.startswith(("19", "18", "0")) and len(inputString)>4:
         return True
-def normalize_single(text):
+def is_meansure(text):
+    if text in labels['MEANSURE'].custom_dict:
+        return True
+def normalize_single(text,previous=""):
+
     if has_numbers(text):
 
         if has_date(text):
@@ -108,9 +115,11 @@ def normalize_single(text):
         if has_numbers(text):
             text = labels['CARDINAL'].convert(text)
 
-    return text.replace("$", "")
+    text = text.replace("%", " phần trăm")
+    text = text.replace("&", " và")
+    return text
 if __name__ == "__main__":
-    v ="13:11-12:12"
+    v ="5%"
     v =word_tokenize(v)
     print(v)
     for i in v:
