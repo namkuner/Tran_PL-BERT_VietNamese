@@ -115,8 +115,9 @@ def normalize_single(text,previous=""):
         if has_numbers(text):
             text = labels['CARDINAL'].convert(text)
 
-    text = text.replace("%", " phần trăm")
-    text = text.replace("&", " và")
+    text = text.replace("%", " phần trăm ")
+    text = text.replace("&", " và ")
+    text = text.replace("°"," độ ")
     return text
 if __name__ == "__main__":
     v ="5%"
