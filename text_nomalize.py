@@ -120,7 +120,7 @@ def normalize_single(text,previous=""):
     text = text.replace("°"," độ ")
     return text
 if __name__ == "__main__":
-    v ="5%"
+    v ="90000"
     v =word_tokenize(v)
     print(v)
     for i in v:
