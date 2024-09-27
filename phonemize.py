@@ -22,7 +22,7 @@ def clean_word(word):
     special_chars = "{<[)}>(]"
     for char in special_chars:
         input_string = word.replace(char, '"')
-    return word
+    return input_string
 def check_phonemes(phonem):
     special_chars_to_ignore = "̪̃/^"
     for char in special_chars_to_ignore:
