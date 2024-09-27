@@ -1,6 +1,6 @@
 log_dir: "Checkpoint"
 mixed_precision: "fp16"
-data_folder: "wikipedia_20220301.en.processed"
+data_folder: "1000_book.vi.processed"
 batch_size: 64
 save_interval: 5000
 log_interval: 10
