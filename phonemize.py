@@ -18,10 +18,10 @@ special_mappings = {
     "doesn": "dˈʌzən",
 }
 
-def clean_word(word):
+def clean_word(input_string):
     special_chars = "{<[)}>(]"
     for char in special_chars:
-        input_string = word.replace(char, '"')
+        input_string = input_string.replace(char, '"')
     return input_string
 def check_phonemes(phonem):
     special_chars_to_ignore = "̪̃/^"
